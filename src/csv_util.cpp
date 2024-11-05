@@ -42,7 +42,7 @@ bool CSVUtil::save2DPoints(const std::string& filename,
 }
 
 bool CSVUtil::save3DPoints(const std::string& filename,
-                          const std::vector<std::vector<cv::Vec3f>>& points) {
+                          const std::vector<std::vector<cv::Point3f>>& points) {
     createDirectory(filename);
     std::ofstream file(filename.c_str());
     if (!file.is_open()) {
@@ -59,9 +59,9 @@ bool CSVUtil::save3DPoints(const std::string& filename,
         for (size_t i = 0; i < points[frame].size(); ++i) {
             file << frame << "," 
                  << i << "," 
-                 << points[frame][i][0] << "," 
-                 << points[frame][i][1] << "," 
-                 << points[frame][i][2] << "\n";
+                 << points[frame][i].x << ","
+                 << points[frame][i].y << ","
+                 << points[frame][i].z << "\n";
         }
     }
     file.close();

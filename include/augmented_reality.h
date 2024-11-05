@@ -10,16 +10,19 @@
 class AugmentedReality {
 public:
     explicit AugmentedReality(int boardWidth = 8, int boardHeight = 6);
+    
     bool detectChessboard(cv::Mat& frame);
     void saveCalibrationData();
-    void saveAllData(const std::string& directory = "/Users/sundri/Desktop/CS5330/Project4/calibaration_data");
+    void saveAllData(const std::string& directory = "/Users/sundri/Desktop/CS5330/Project4/calibration_data");
+    void calibrateCamera();
+    bool computePose(cv::Mat& rvec, cv::Mat& tvec);
     
     // Getters
     std::vector<cv::Point2f> getCorners() const;
     size_t getSavedFramesCount() const;
     const std::vector<std::vector<cv::Point2f>>& getCornerList() const;
-    const std::vector<std::vector<cv::Vec3f>>& getPointList() const;
-    void calibrateCamera();
+    const std::vector<std::vector<cv::Point3f>>& getPointList() const;
+    bool isCalibrated() const { return calibrationDone; }
 
 private:
     cv::Size patternSize;                              // Size of the chessboard
@@ -29,13 +32,14 @@ private:
     std::vector<cv::Point2f> lastSuccessfulCorners;    // Store the last successful corners
     
     std::vector<std::vector<cv::Point2f>> corner_list; // All saved corner sets
-    std::vector<std::vector<cv::Vec3f>> point_list;    // All saved 3D point sets
+    std::vector<std::vector<cv::Point3f>> point_list;    // Changed to Point3f
     std::vector<cv::Mat> calibration_frames;           // Saved frames for calibration
     
-    cv::Mat camera_matrix;               // camera matrix
-    cv::Mat distortion_coefficients;      // distortion coefficients
-    std::vector<cv::Vec3f> createWorldPoints() const;
+    cv::Mat camera_matrix;                             // Camera matrix
+    cv::Mat distortion_coefficients;                   // Distortion coefficients
+    bool calibrationDone;                              // Flag to track calibration status
+    
+    std::vector<cv::Point3f> createWorldPoints() const;
 };
 
 #endif // AUGMENTED_REALITY_H
-

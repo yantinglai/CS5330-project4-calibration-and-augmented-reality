@@ -13,7 +13,7 @@ public:
                            const std::vector<std::vector<cv::Point2f>>& points);
     
     static bool save3DPoints(const std::string& filename,
-                           const std::vector<std::vector<cv::Vec3f>>& points);
+                           const std::vector<std::vector<cv::Point3f>>& points);
     
     static bool saveSummary(const std::string& filename,
                            int numFrames,

@@ -1,36 +1,69 @@
+// augmented_reality.cpp
 #include "augmented_reality.h"
 
 AugmentedReality::AugmentedReality(int boardWidth, int boardHeight)
-    : patternSize(boardWidth, boardHeight), lastFrameSuccess(false) {
+    : patternSize(boardWidth, boardHeight), 
+      lastFrameSuccess(false),
+      calibrationDone(false) {
 }
 
 bool AugmentedReality::detectChessboard(cv::Mat& frame) {
-    // Convert frame to grayscale
     cv::Mat gray;
     cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
     
-    // Find chessboard corners
     bool patternFound = cv::findChessboardCorners(gray, patternSize, corners,
                          cv::CALIB_CB_ADAPTIVE_THRESH +
                          cv::CALIB_CB_NORMALIZE_IMAGE +
                          cv::CALIB_CB_FAST_CHECK);
     
     if(patternFound) {
-        // Refine corner positions
         cv::cornerSubPix(gray, corners, cv::Size(11,11), cv::Size(-1,-1),
                         cv::TermCriteria(cv::TermCriteria::EPS + 
                                        cv::TermCriteria::COUNT, 30, 0.1));
         
-        // Draw the corners
         cv::drawChessboardCorners(frame, patternSize, corners, patternFound);
         
-        // Store successful frame and corners
         frame.copyTo(lastSuccessfulFrame);
         lastSuccessfulCorners = corners;
         lastFrameSuccess = true;
+
+        if (calibrationDone) {
+            cv::Mat rvec, tvec;
+            if (computePose(rvec, tvec)) {
+                std::cout << "\rRotation vector: [" << std::fixed << std::setprecision(2) 
+                         << rvec.at<double>(0) << ", " 
+                         << rvec.at<double>(1) << ", " 
+                         << rvec.at<double>(2) << "] " 
+                         << "Translation vector: [" 
+                         << tvec.at<double>(0) << ", "
+                         << tvec.at<double>(1) << ", "
+                         << tvec.at<double>(2) << "]     " 
+                         << std::flush;
+                std::stringstream ss;
+                ss << std::fixed << std::setprecision(2);
+                
+                // display rotation vector on video
+                ss << "R: [" << rvec.at<double>(0) << ", " 
+                        << rvec.at<double>(1) << ", " 
+                        << rvec.at<double>(2) << "]";
+                cv::putText(frame, ss.str(), cv::Point(10, 60), 
+                        cv::FONT_HERSHEY_SIMPLEX, 0.5, 
+                        cv::Scalar(0, 255, 0), 2);
+                
+                // display translation vector on video
+                ss.str("");
+                ss << "T: [" << tvec.at<double>(0) << ", "
+                            << tvec.at<double>(1) << ", "
+                            << tvec.at<double>(2) << "]";
+                cv::putText(frame, ss.str(), cv::Point(10, 90), 
+                        cv::FONT_HERSHEY_SIMPLEX, 0.5, 
+                        cv::Scalar(0, 255, 0), 2);
+            }
+        }
         
-        // Display information
-        std::string msg = "Corners found. Press 's' to save. Saved: " + 
+        std::string msg = calibrationDone ? 
+                         "Calibrated - Showing pose estimation" :
+                         "Corners found. Press 's' to save. Saved: " + 
                          std::to_string(getSavedFramesCount());
         cv::putText(frame, msg, cv::Point(10, 30), cv::FONT_HERSHEY_SIMPLEX, 
                     0.8, cv::Scalar(0, 255, 0), 2);
@@ -63,37 +96,56 @@ void AugmentedReality::saveCalibrationData() {
               << " detection)" << std::endl;
 }
 
-std::vector<cv::Vec3f> AugmentedReality::createWorldPoints() const {
-    std::vector<cv::Vec3f> points;
-    for(int i = 0; i < patternSize.height; ++i) {
-        for(int j = 0; j < patternSize.width; ++j) {
-            points.push_back(cv::Vec3f(j, -i, 0));
-        }
+void AugmentedReality::calibrateCamera() {
+    if (corner_list.size() < 5) {
+        std::cout << "\nNot enough calibration frames. Need at least 5, current: " 
+                  << corner_list.size() << std::endl;
+        return;
     }
-    return points;
+
+    camera_matrix = cv::Mat::eye(3, 3, CV_64F);
+    distortion_coefficients = cv::Mat::zeros(8, 1, CV_64F);
+    std::vector<cv::Mat> rvecs, tvecs;
+
+    double rms = cv::calibrateCamera(point_list, corner_list, 
+                                   lastSuccessfulFrame.size(),
+                                   camera_matrix, distortion_coefficients, 
+                                   rvecs, tvecs);
+
+    calibrationDone = true;
+    std::cout << "\nCalibration complete!\n" 
+              << "RMS error: " << rms << "\n"
+              << "Camera matrix:\n" << camera_matrix << "\n"
+              << "Distortion coefficients:\n" << distortion_coefficients << std::endl;
+}
+
+bool AugmentedReality::computePose(cv::Mat& rvec, cv::Mat& tvec) {
+    if (!calibrationDone || corners.empty()) {
+        return false;
+    }
+    
+    std::vector<cv::Point3f> objectPoints = createWorldPoints();
+    return cv::solvePnP(objectPoints, corners, camera_matrix, 
+                       distortion_coefficients, rvec, tvec);
 }
 
 void AugmentedReality::saveAllData(const std::string& directory) {
     system(("mkdir -p " + directory).c_str());
     
-    // Save corner points
     if (!CSVUtil::save2DPoints(directory + "/corners.csv", corner_list)) {
         std::cerr << "Failed to save corner data" << std::endl;
     }
     
-    // Save 3D world points
     if (!CSVUtil::save3DPoints(directory + "/points.csv", point_list)) {
         std::cerr << "Failed to save 3D points data" << std::endl;
     }
     
-    // Save summary
     if (!CSVUtil::saveSummary(directory + "/summary.csv", 
                              calibration_frames.size(), 
                              patternSize)) {
         std::cerr << "Failed to save summary data" << std::endl;
     }
     
-    // Save images
     for(size_t i = 0; i < calibration_frames.size(); ++i) {
         std::string filename = directory + "/frame_" + 
                              std::to_string(i) + ".png";
@@ -102,38 +154,28 @@ void AugmentedReality::saveAllData(const std::string& directory) {
         }
     }
     
+    // Save camera calibration parameters if calibrated
+    if (calibrationDone) {
+        cv::FileStorage fs(directory + "/camera_params.yml", cv::FileStorage::WRITE);
+        fs << "camera_matrix" << camera_matrix;
+        fs << "dist_coeffs" << distortion_coefficients;
+        fs.release();
+    }
+    
     std::cout << "Saved " << calibration_frames.size() << " frames to " 
               << directory << " directory" << std::endl;
 }
 
-void AugmentedReality::calibrateCamera() {
-    if (corner_list.size() < 5) {
-        std::cerr << "Not enough calibration frames. Capture at least 5 frames." << std::endl;
-        return;
+std::vector<cv::Point3f> AugmentedReality::createWorldPoints() const {
+    std::vector<cv::Point3f> points;
+    for(int i = 0; i < patternSize.height; ++i) {
+        for(int j = 0; j < patternSize.width; ++j) {
+            points.push_back(cv::Point3f(j, -i, 0));
+        }
     }
-
-    cv::Mat camera_matrix = (cv::Mat_<double>(3, 3) << 1, 0, lastSuccessfulFrame.cols / 2.0,
-                                                       0, 1, lastSuccessfulFrame.rows / 2.0,
-                                                       0, 0, 1);
-    
-    cv::Mat distortion_coefficients = cv::Mat::zeros(8, 1, CV_64F);
-    std::vector<cv::Mat> rotations, translations; 
-    
-    double reprojection_error = cv::calibrateCamera(point_list, corner_list, 
-                                                    lastSuccessfulFrame.size(),
-                                                    camera_matrix, distortion_coefficients, 
-                                                    rotations, translations,
-                                                    cv::CALIB_FIX_ASPECT_RATIO);
-    
-    std::cout << "Calibration complete. Reprojection error: " << reprojection_error << std::endl;
-    std::cout << "Camera matrix:\n" << camera_matrix << std::endl;
-    std::cout << "Distortion coefficients:\n" << distortion_coefficients.t() << std::endl;
-
-    this->camera_matrix = camera_matrix.clone();
-    this->distortion_coefficients = distortion_coefficients.clone();
+    return points;
 }
 
-// Getter implementations
 std::vector<cv::Point2f> AugmentedReality::getCorners() const {
     return corners;
 }
@@ -146,6 +188,6 @@ const std::vector<std::vector<cv::Point2f>>& AugmentedReality::getCornerList() c
     return corner_list;
 }
 
-const std::vector<std::vector<cv::Vec3f>>& AugmentedReality::getPointList() const {
+const std::vector<std::vector<cv::Point3f>>& AugmentedReality::getPointList() const {
     return point_list;
 }
