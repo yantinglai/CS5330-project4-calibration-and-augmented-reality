@@ -1,0 +1,3 @@
+/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles/augmented_reality.dir
+/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles/edit_cache.dir
+/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles/rebuild_cache.dir
