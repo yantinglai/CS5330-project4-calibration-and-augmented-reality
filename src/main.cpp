@@ -42,7 +42,8 @@ int main() {
         if (patternFound && ar.isCalibrated() && ar.getCorners().size() >= 4) {
             cv::Mat rvec, tvec;
             if (ar.computePose(rvec, tvec)) {
-                ar.draw3DAxis(frame, rvec, tvec); // Draw 3D axis if pose is computed
+                // ar.draw3DAxis(frame, rvec, tvec); // Draw 3D axis if pose is computed
+                ar.drawVirtualObject(frame, rvec, tvec); // Draw the virtual object
             }
         }
 

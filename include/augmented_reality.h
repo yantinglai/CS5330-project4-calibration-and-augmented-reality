@@ -17,6 +17,7 @@ public:
     void calibrateCamera();
     bool computePose(cv::Mat& rvec, cv::Mat& tvec);
     void draw3DAxis(cv::Mat& frame, const cv::Mat& rvec, const cv::Mat& tvec);
+    void drawVirtualObject(cv::Mat& frame, const cv::Mat& rvec, const cv::Mat& tvec);
     
     // Getters
     std::vector<cv::Point2f> getCorners() const;
@@ -40,7 +41,9 @@ private:
     cv::Mat distortion_coefficients;                   // Distortion coefficients
     bool calibrationDone;                              // Flag to track calibration status
     
-    std::vector<cv::Point3f> createWorldPoints() const;
+    
+    std::vector<cv::Point3f> createWorldPoints() const; // Generate the 3D world points corresponding to the chessboard pattern
+    std::vector<cv::Point3f> virtualObjectPoints;       // 3D points of the virtual object (e.g., pyramid) defined in world coordinates
 };
 
 #endif // AUGMENTED_REALITY_H

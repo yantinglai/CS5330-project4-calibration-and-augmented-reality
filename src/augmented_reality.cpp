@@ -5,7 +5,20 @@ AugmentedReality::AugmentedReality(int boardWidth, int boardHeight)
     : patternSize(boardWidth, boardHeight), 
       lastFrameSuccess(false),
       calibrationDone(false) {
+
+      float scaleFactor = 2.0;
+          
+    // Define the 3D points for a pyramid virtual object in world coordinates
+    virtualObjectPoints = {
+        cv::Point3f(0, 0, 0)  * scaleFactor,        // Center of the base
+        cv::Point3f(-0.5, -0.5, 0)  * scaleFactor,  // Bottom-left of the base
+        cv::Point3f(0.5, -0.5, 0)  * scaleFactor,   // Bottom-right of the base
+        cv::Point3f(0.5, 0.5, 0)  * scaleFactor,    // Top-right of the base
+        cv::Point3f(-0.5, 0.5, 0)  * scaleFactor,   // Top-left of the base
+        cv::Point3f(0, 0, 1) * scaleFactor          // The apex of the pyramid
+    };
 }
+
 
 bool AugmentedReality::detectChessboard(cv::Mat& frame) {
     cv::Mat gray;
@@ -192,6 +205,32 @@ void AugmentedReality::draw3DAxis(cv::Mat& frame, const cv::Mat& rvec, const cv:
     cv::line(frame, imagePoints[0], imagePoints[1], cv::Scalar(0, 0, 255), 3); // X-axis in red
     cv::line(frame, imagePoints[0], imagePoints[2], cv::Scalar(0, 255, 0), 3); // Y-axis in green
     cv::line(frame, imagePoints[0], imagePoints[3], cv::Scalar(255, 0, 0), 3); // Z-axis in blue
+}
+
+// Draws the virtual object - a pyramid on the image
+void AugmentedReality::drawVirtualObject(cv::Mat& frame, const cv::Mat& rvec, const cv::Mat& tvec) {
+    if (virtualObjectPoints.empty()) {
+        std::cerr << "Virtual object points not initialized." << std::endl;
+        return;
+    }
+
+    // Project 3D points to the 2D image plane
+    std::vector<cv::Point2f> imagePoints;
+    cv::projectPoints(virtualObjectPoints, rvec, tvec, camera_matrix, distortion_coefficients, imagePoints);
+
+    // Draw the base of the pyramid
+    cv::line(frame, imagePoints[0], imagePoints[1], cv::Scalar(255, 0, 0), 2); // Base edges in blue
+    cv::line(frame, imagePoints[1], imagePoints[2], cv::Scalar(255, 0, 0), 2);
+    cv::line(frame, imagePoints[2], imagePoints[3], cv::Scalar(255, 0, 0), 2);
+    cv::line(frame, imagePoints[3], imagePoints[4], cv::Scalar(255, 0, 0), 2);
+    cv::line(frame, imagePoints[4], imagePoints[0], cv::Scalar(255, 0, 0), 2);
+
+    // Draw lines from base to the apex of the pyramid
+    cv::line(frame, imagePoints[0], imagePoints[5], cv::Scalar(0, 255, 0), 2); // Lines to apex in green
+    cv::line(frame, imagePoints[1], imagePoints[5], cv::Scalar(0, 255, 0), 2);
+    cv::line(frame, imagePoints[2], imagePoints[5], cv::Scalar(0, 255, 0), 2);
+    cv::line(frame, imagePoints[3], imagePoints[5], cv::Scalar(0, 255, 0), 2);
+    cv::line(frame, imagePoints[4], imagePoints[5], cv::Scalar(0, 255, 0), 2);
 }
 
 
