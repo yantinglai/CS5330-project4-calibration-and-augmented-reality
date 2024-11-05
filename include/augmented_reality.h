@@ -16,6 +16,7 @@ public:
     void saveAllData(const std::string& directory = "/Users/sundri/Desktop/CS5330/Project4/calibration_data");
     void calibrateCamera();
     bool computePose(cv::Mat& rvec, cv::Mat& tvec);
+    void draw3DAxis(cv::Mat& frame, const cv::Mat& rvec, const cv::Mat& tvec);
     
     // Getters
     std::vector<cv::Point2f> getCorners() const;

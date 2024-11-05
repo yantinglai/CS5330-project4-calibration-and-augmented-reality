@@ -176,6 +176,25 @@ std::vector<cv::Point3f> AugmentedReality::createWorldPoints() const {
     return points;
 }
 
+void AugmentedReality::draw3DAxis(cv::Mat& frame, const cv::Mat& rvec, const cv::Mat& tvec) {
+    // Define the 3D points for the axis (X, Y, Z). Each axis is 3 units in length.
+    std::vector<cv::Point3f> axisPoints;
+    axisPoints.push_back(cv::Point3f(0, 0, 0));  // Origin
+    axisPoints.push_back(cv::Point3f(3, 0, 0));  // X-axis endpoint
+    axisPoints.push_back(cv::Point3f(0, 3, 0));  // Y-axis endpoint
+    axisPoints.push_back(cv::Point3f(0, 0, -3)); // Z-axis endpoint (negative for upward in image)
+
+    // Project the 3D points to the 2D image plane
+    std::vector<cv::Point2f> imagePoints;
+    cv::projectPoints(axisPoints, rvec, tvec, camera_matrix, distortion_coefficients, imagePoints);
+
+    // Draw the 3D axis on the image
+    cv::line(frame, imagePoints[0], imagePoints[1], cv::Scalar(0, 0, 255), 3); // X-axis in red
+    cv::line(frame, imagePoints[0], imagePoints[2], cv::Scalar(0, 255, 0), 3); // Y-axis in green
+    cv::line(frame, imagePoints[0], imagePoints[3], cv::Scalar(255, 0, 0), 3); // Z-axis in blue
+}
+
+
 std::vector<cv::Point2f> AugmentedReality::getCorners() const {
     return corners;
 }

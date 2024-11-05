@@ -4,7 +4,7 @@
 #include <iomanip>
 
 int main() {
-    cv::VideoCapture cap(0);
+    cv::VideoCapture cap(1);
     if(!cap.isOpened()) {
         std::cerr << "Error: Could not open camera." << std::endl;
         return -1;
@@ -37,7 +37,15 @@ int main() {
             break;
         }
 
-        ar.detectChessboard(frame);
+        bool patternFound = ar.detectChessboard(frame);
+
+        if (patternFound && ar.isCalibrated() && ar.getCorners().size() >= 4) {
+            cv::Mat rvec, tvec;
+            if (ar.computePose(rvec, tvec)) {
+                ar.draw3DAxis(frame, rvec, tvec); // Draw 3D axis if pose is computed
+            }
+        }
+
         cv::imshow("Chessboard Detection", frame);
 
         char key = (char)cv::waitKey(30);
