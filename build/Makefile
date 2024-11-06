@@ -129,6 +129,19 @@ augmented_reality/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/build
 .PHONY : augmented_reality/fast
 
+#=============================================================================
+# Target rules for targets named harris_corner_detection
+
+# Build rule for target.
+harris_corner_detection: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 harris_corner_detection
+.PHONY : harris_corner_detection
+
+# fast build rule for target.
+harris_corner_detection/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/build
+.PHONY : harris_corner_detection/fast
+
 src/augmented_reality.o: src/augmented_reality.cpp.o
 .PHONY : src/augmented_reality.o
 
@@ -177,6 +190,30 @@ src/csv_util.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/src/csv_util.cpp.s
 .PHONY : src/csv_util.cpp.s
 
+src/harris_corner_detection.o: src/harris_corner_detection.cpp.o
+.PHONY : src/harris_corner_detection.o
+
+# target to build an object file
+src/harris_corner_detection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/src/harris_corner_detection.cpp.o
+.PHONY : src/harris_corner_detection.cpp.o
+
+src/harris_corner_detection.i: src/harris_corner_detection.cpp.i
+.PHONY : src/harris_corner_detection.i
+
+# target to preprocess a source file
+src/harris_corner_detection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/src/harris_corner_detection.cpp.i
+.PHONY : src/harris_corner_detection.cpp.i
+
+src/harris_corner_detection.s: src/harris_corner_detection.cpp.s
+.PHONY : src/harris_corner_detection.s
+
+# target to generate assembly for a file
+src/harris_corner_detection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/src/harris_corner_detection.cpp.s
+.PHONY : src/harris_corner_detection.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -210,12 +247,16 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... augmented_reality"
+	@echo "... harris_corner_detection"
 	@echo "... src/augmented_reality.o"
 	@echo "... src/augmented_reality.i"
 	@echo "... src/augmented_reality.s"
 	@echo "... src/csv_util.o"
 	@echo "... src/csv_util.i"
 	@echo "... src/csv_util.s"
+	@echo "... src/harris_corner_detection.o"
+	@echo "... src/harris_corner_detection.i"
+	@echo "... src/harris_corner_detection.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -64,6 +64,7 @@ CMAKE_BINARY_DIR = /Users/sundri/Desktop/CS5330/Project4/build
 
 # The main recursive "all" target.
 all: CMakeFiles/augmented_reality.dir/all
+all: CMakeFiles/harris_corner_detection.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -72,6 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/augmented_reality.dir/clean
+clean: CMakeFiles/harris_corner_detection.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -99,6 +101,32 @@ augmented_reality: CMakeFiles/augmented_reality.dir/rule
 CMakeFiles/augmented_reality.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/clean
 .PHONY : CMakeFiles/augmented_reality.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/harris_corner_detection.dir
+
+# All Build rule for target.
+CMakeFiles/harris_corner_detection.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=5,6 "Built target harris_corner_detection"
+.PHONY : CMakeFiles/harris_corner_detection.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/harris_corner_detection.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/harris_corner_detection.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 0
+.PHONY : CMakeFiles/harris_corner_detection.dir/rule
+
+# Convenience name for target.
+harris_corner_detection: CMakeFiles/harris_corner_detection.dir/rule
+.PHONY : harris_corner_detection
+
+# clean rule for target.
+CMakeFiles/harris_corner_detection.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/clean
+.PHONY : CMakeFiles/harris_corner_detection.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

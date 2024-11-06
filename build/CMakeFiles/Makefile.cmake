@@ -54,4 +54,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/augmented_reality.dir/DependInfo.cmake"
+  "CMakeFiles/harris_corner_detection.dir/DependInfo.cmake"
   )

@@ -12,11 +12,10 @@ find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS}
                    ${PROJECT_SOURCE_DIR}/include)
 
-# Add executable
-add_executable(augmented_reality
-    src/main.cpp
-    src/augmented_reality.cpp
-    src/csv_util.cpp)
-
-# Link OpenCV libraries
+# Augmented Reality executable
+add_executable(augmented_reality src/main.cpp src/augmented_reality.cpp src/csv_util.cpp)
 target_link_libraries(augmented_reality ${OpenCV_LIBS})
+
+# Harris Corner Detection executable
+add_executable(harris_corner_detection src/harris_corner_detection.cpp)
+target_link_libraries(harris_corner_detection ${OpenCV_LIBS})
