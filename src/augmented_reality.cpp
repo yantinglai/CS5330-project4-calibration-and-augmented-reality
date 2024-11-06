@@ -19,27 +19,32 @@ AugmentedReality::AugmentedReality(int boardWidth, int boardHeight)
     };
 }
 
-
 bool AugmentedReality::detectChessboard(cv::Mat& frame) {
     cv::Mat gray;
     cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
     
+    // Find chessboard corners
     bool patternFound = cv::findChessboardCorners(gray, patternSize, corners,
                          cv::CALIB_CB_ADAPTIVE_THRESH +
                          cv::CALIB_CB_NORMALIZE_IMAGE +
                          cv::CALIB_CB_FAST_CHECK);
     
     if(patternFound) {
+        // Refine corner locations
         cv::cornerSubPix(gray, corners, cv::Size(11,11), cv::Size(-1,-1),
                         cv::TermCriteria(cv::TermCriteria::EPS + 
                                        cv::TermCriteria::COUNT, 30, 0.1));
         
+        // Draw the detected corners on the frame
         cv::drawChessboardCorners(frame, patternSize, corners, patternFound);
         
-        frame.copyTo(lastSuccessfulFrame);
+        // Deep copy of the frame to ensure independent data storage
+        lastSuccessfulFrame = frame.clone();
+        // Store the corners for calibration
         lastSuccessfulCorners = corners;
         lastFrameSuccess = true;
 
+        // If camera is calibrated, compute and display pose information
         if (calibrationDone) {
             cv::Mat rvec, tvec;
             if (computePose(rvec, tvec)) {
@@ -55,7 +60,7 @@ bool AugmentedReality::detectChessboard(cv::Mat& frame) {
                 std::stringstream ss;
                 ss << std::fixed << std::setprecision(2);
                 
-                // display rotation vector on video
+                // Display rotation vector on frame
                 ss << "R: [" << rvec.at<double>(0) << ", " 
                         << rvec.at<double>(1) << ", " 
                         << rvec.at<double>(2) << "]";
@@ -63,17 +68,18 @@ bool AugmentedReality::detectChessboard(cv::Mat& frame) {
                         cv::FONT_HERSHEY_SIMPLEX, 0.5, 
                         cv::Scalar(0, 255, 0), 2);
                 
-                // display translation vector on video
+                // Display translation vector on frame
                 ss.str("");
                 ss << "T: [" << tvec.at<double>(0) << ", "
-                            << tvec.at<double>(1) << ", "
-                            << tvec.at<double>(2) << "]";
+                           << tvec.at<double>(1) << ", "
+                           << tvec.at<double>(2) << "]";
                 cv::putText(frame, ss.str(), cv::Point(10, 90), 
                         cv::FONT_HERSHEY_SIMPLEX, 0.5, 
                         cv::Scalar(0, 255, 0), 2);
             }
         }
         
+        // Display appropriate message based on calibration status
         std::string msg = calibrationDone ? 
                          "Calibrated - Showing pose estimation" :
                          "Corners found. Press 's' to save. Saved: " + 
@@ -81,10 +87,12 @@ bool AugmentedReality::detectChessboard(cv::Mat& frame) {
         cv::putText(frame, msg, cv::Point(10, 30), cv::FONT_HERSHEY_SIMPLEX, 
                     0.8, cv::Scalar(0, 255, 0), 2);
     } else {
+        // Update state for unsuccessful detection
         lastFrameSuccess = false;
         cv::putText(frame, "No chessboard detected", cv::Point(10, 30),
                     cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(0, 0, 255), 2);
         
+        // Indicate if there's a previously successful frame available
         if (!lastSuccessfulFrame.empty()) {
             cv::putText(frame, "Last successful frame available", cv::Point(10, 60),
                     cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(0, 255, 0), 2);

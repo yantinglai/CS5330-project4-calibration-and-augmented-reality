@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ar_lib
+
+# Build rule for target.
+ar_lib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ar_lib
+.PHONY : ar_lib
+
+# fast build rule for target.
+ar_lib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/build
+.PHONY : ar_lib/fast
+
+#=============================================================================
 # Target rules for targets named augmented_reality
 
 # Build rule for target.
@@ -142,12 +155,25 @@ harris_corner_detection/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/build
 .PHONY : harris_corner_detection/fast
 
+#=============================================================================
+# Target rules for targets named image_video_ar
+
+# Build rule for target.
+image_video_ar: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 image_video_ar
+.PHONY : image_video_ar
+
+# fast build rule for target.
+image_video_ar/fast:
+	$(MAKE) $(MAKESILENT) -f extension/image_video_ar/CMakeFiles/image_video_ar.dir/build.make extension/image_video_ar/CMakeFiles/image_video_ar.dir/build
+.PHONY : image_video_ar/fast
+
 src/augmented_reality.o: src/augmented_reality.cpp.o
 .PHONY : src/augmented_reality.o
 
 # target to build an object file
 src/augmented_reality.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/src/augmented_reality.cpp.o
 .PHONY : src/augmented_reality.cpp.o
 
 src/augmented_reality.i: src/augmented_reality.cpp.i
@@ -155,7 +181,7 @@ src/augmented_reality.i: src/augmented_reality.cpp.i
 
 # target to preprocess a source file
 src/augmented_reality.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/src/augmented_reality.cpp.i
 .PHONY : src/augmented_reality.cpp.i
 
 src/augmented_reality.s: src/augmented_reality.cpp.s
@@ -163,7 +189,7 @@ src/augmented_reality.s: src/augmented_reality.cpp.s
 
 # target to generate assembly for a file
 src/augmented_reality.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/src/augmented_reality.cpp.s
 .PHONY : src/augmented_reality.cpp.s
 
 src/csv_util.o: src/csv_util.cpp.o
@@ -171,7 +197,7 @@ src/csv_util.o: src/csv_util.cpp.o
 
 # target to build an object file
 src/csv_util.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/src/csv_util.cpp.o
 .PHONY : src/csv_util.cpp.o
 
 src/csv_util.i: src/csv_util.cpp.i
@@ -179,7 +205,7 @@ src/csv_util.i: src/csv_util.cpp.i
 
 # target to preprocess a source file
 src/csv_util.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/src/csv_util.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/src/csv_util.cpp.i
 .PHONY : src/csv_util.cpp.i
 
 src/csv_util.s: src/csv_util.cpp.s
@@ -187,7 +213,7 @@ src/csv_util.s: src/csv_util.cpp.s
 
 # target to generate assembly for a file
 src/csv_util.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/src/csv_util.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/src/csv_util.cpp.s
 .PHONY : src/csv_util.cpp.s
 
 src/harris_corner_detection.o: src/harris_corner_detection.cpp.o
@@ -246,8 +272,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... ar_lib"
 	@echo "... augmented_reality"
 	@echo "... harris_corner_detection"
+	@echo "... image_video_ar"
 	@echo "... src/augmented_reality.o"
 	@echo "... src/augmented_reality.i"
 	@echo "... src/augmented_reality.s"

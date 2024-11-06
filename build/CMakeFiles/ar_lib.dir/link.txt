@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libar_lib.a CMakeFiles/ar_lib.dir/src/augmented_reality.cpp.o CMakeFiles/ar_lib.dir/src/csv_util.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libar_lib.a

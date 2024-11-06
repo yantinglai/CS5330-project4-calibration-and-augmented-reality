@@ -63,32 +63,77 @@ CMAKE_BINARY_DIR = /Users/sundri/Desktop/CS5330/Project4/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/ar_lib.dir/all
 all: CMakeFiles/augmented_reality.dir/all
 all: CMakeFiles/harris_corner_detection.dir/all
+all: extension/image_video_ar/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall:
+preinstall: extension/image_video_ar/preinstall
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/ar_lib.dir/clean
 clean: CMakeFiles/augmented_reality.dir/clean
 clean: CMakeFiles/harris_corner_detection.dir/clean
+clean: extension/image_video_ar/clean
 .PHONY : clean
+
+#=============================================================================
+# Directory level rules for directory extension/image_video_ar
+
+# Recursive "all" directory target.
+extension/image_video_ar/all: extension/image_video_ar/CMakeFiles/image_video_ar.dir/all
+.PHONY : extension/image_video_ar/all
+
+# Recursive "preinstall" directory target.
+extension/image_video_ar/preinstall:
+.PHONY : extension/image_video_ar/preinstall
+
+# Recursive "clean" directory target.
+extension/image_video_ar/clean: extension/image_video_ar/CMakeFiles/image_video_ar.dir/clean
+.PHONY : extension/image_video_ar/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/ar_lib.dir
+
+# All Build rule for target.
+CMakeFiles/ar_lib.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=1,2,3 "Built target ar_lib"
+.PHONY : CMakeFiles/ar_lib.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ar_lib.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 3
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/ar_lib.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 0
+.PHONY : CMakeFiles/ar_lib.dir/rule
+
+# Convenience name for target.
+ar_lib: CMakeFiles/ar_lib.dir/rule
+.PHONY : ar_lib
+
+# clean rule for target.
+CMakeFiles/ar_lib.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ar_lib.dir/build.make CMakeFiles/ar_lib.dir/clean
+.PHONY : CMakeFiles/ar_lib.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/augmented_reality.dir
 
 # All Build rule for target.
-CMakeFiles/augmented_reality.dir/all:
+CMakeFiles/augmented_reality.dir/all: CMakeFiles/ar_lib.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/augmented_reality.dir/build.make CMakeFiles/augmented_reality.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=1,2,3,4 "Built target augmented_reality"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=4,5 "Built target augmented_reality"
 .PHONY : CMakeFiles/augmented_reality.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/augmented_reality.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/augmented_reality.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 0
 .PHONY : CMakeFiles/augmented_reality.dir/rule
@@ -109,7 +154,7 @@ CMakeFiles/augmented_reality.dir/clean:
 CMakeFiles/harris_corner_detection.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=5,6 "Built target harris_corner_detection"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=6,7 "Built target harris_corner_detection"
 .PHONY : CMakeFiles/harris_corner_detection.dir/all
 
 # Build rule for subdir invocation for target.
@@ -127,6 +172,32 @@ harris_corner_detection: CMakeFiles/harris_corner_detection.dir/rule
 CMakeFiles/harris_corner_detection.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/harris_corner_detection.dir/build.make CMakeFiles/harris_corner_detection.dir/clean
 .PHONY : CMakeFiles/harris_corner_detection.dir/clean
+
+#=============================================================================
+# Target rules for target extension/image_video_ar/CMakeFiles/image_video_ar.dir
+
+# All Build rule for target.
+extension/image_video_ar/CMakeFiles/image_video_ar.dir/all: CMakeFiles/ar_lib.dir/all
+	$(MAKE) $(MAKESILENT) -f extension/image_video_ar/CMakeFiles/image_video_ar.dir/build.make extension/image_video_ar/CMakeFiles/image_video_ar.dir/depend
+	$(MAKE) $(MAKESILENT) -f extension/image_video_ar/CMakeFiles/image_video_ar.dir/build.make extension/image_video_ar/CMakeFiles/image_video_ar.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=8,9,10 "Built target image_video_ar"
+.PHONY : extension/image_video_ar/CMakeFiles/image_video_ar.dir/all
+
+# Build rule for subdir invocation for target.
+extension/image_video_ar/CMakeFiles/image_video_ar.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 extension/image_video_ar/CMakeFiles/image_video_ar.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles 0
+.PHONY : extension/image_video_ar/CMakeFiles/image_video_ar.dir/rule
+
+# Convenience name for target.
+image_video_ar: extension/image_video_ar/CMakeFiles/image_video_ar.dir/rule
+.PHONY : image_video_ar
+
+# clean rule for target.
+extension/image_video_ar/CMakeFiles/image_video_ar.dir/clean:
+	$(MAKE) $(MAKESILENT) -f extension/image_video_ar/CMakeFiles/image_video_ar.dir/build.make extension/image_video_ar/CMakeFiles/image_video_ar.dir/clean
+.PHONY : extension/image_video_ar/CMakeFiles/image_video_ar.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

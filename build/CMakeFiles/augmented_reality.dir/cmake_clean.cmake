@@ -1,8 +1,4 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o"
-  "CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o.d"
-  "CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o"
-  "CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o.d"
   "CMakeFiles/augmented_reality.dir/src/main.cpp.o"
   "CMakeFiles/augmented_reality.dir/src/main.cpp.o.d"
   "augmented_reality"

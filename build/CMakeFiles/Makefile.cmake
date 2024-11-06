@@ -11,6 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.30.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.30.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.30.3/CMakeSystem.cmake"
+  "/Users/sundri/Desktop/CS5330/Project4/extension/image_video_ar/CMakeLists.txt"
   "/opt/homebrew/Cellar/cmake/3.30.3/share/cmake/Modules/CMakeCInformation.cmake"
   "/opt/homebrew/Cellar/cmake/3.30.3/share/cmake/Modules/CMakeCXXInformation.cmake"
   "/opt/homebrew/Cellar/cmake/3.30.3/share/cmake/Modules/CMakeCommonLanguageInclude.cmake"
@@ -49,10 +50,13 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "extension/image_video_ar/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/ar_lib.dir/DependInfo.cmake"
   "CMakeFiles/augmented_reality.dir/DependInfo.cmake"
   "CMakeFiles/harris_corner_detection.dir/DependInfo.cmake"
+  "extension/image_video_ar/CMakeFiles/image_video_ar.dir/DependInfo.cmake"
   )

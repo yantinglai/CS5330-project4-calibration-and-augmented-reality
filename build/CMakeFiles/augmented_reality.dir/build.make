@@ -83,47 +83,16 @@ CMakeFiles/augmented_reality.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/augmented_reality.dir/src/main.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sundri/Desktop/CS5330/Project4/src/main.cpp -o CMakeFiles/augmented_reality.dir/src/main.cpp.s
 
-CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o: CMakeFiles/augmented_reality.dir/flags.make
-CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o: /Users/sundri/Desktop/CS5330/Project4/src/augmented_reality.cpp
-CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o: CMakeFiles/augmented_reality.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o -MF CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o.d -o CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o -c /Users/sundri/Desktop/CS5330/Project4/src/augmented_reality.cpp
-
-CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/sundri/Desktop/CS5330/Project4/src/augmented_reality.cpp > CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.i
-
-CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sundri/Desktop/CS5330/Project4/src/augmented_reality.cpp -o CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.s
-
-CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o: CMakeFiles/augmented_reality.dir/flags.make
-CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o: /Users/sundri/Desktop/CS5330/Project4/src/csv_util.cpp
-CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o: CMakeFiles/augmented_reality.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o -MF CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o.d -o CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o -c /Users/sundri/Desktop/CS5330/Project4/src/csv_util.cpp
-
-CMakeFiles/augmented_reality.dir/src/csv_util.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/augmented_reality.dir/src/csv_util.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/sundri/Desktop/CS5330/Project4/src/csv_util.cpp > CMakeFiles/augmented_reality.dir/src/csv_util.cpp.i
-
-CMakeFiles/augmented_reality.dir/src/csv_util.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/augmented_reality.dir/src/csv_util.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sundri/Desktop/CS5330/Project4/src/csv_util.cpp -o CMakeFiles/augmented_reality.dir/src/csv_util.cpp.s
-
 # Object files for target augmented_reality
 augmented_reality_OBJECTS = \
-"CMakeFiles/augmented_reality.dir/src/main.cpp.o" \
-"CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o" \
-"CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o"
+"CMakeFiles/augmented_reality.dir/src/main.cpp.o"
 
 # External object files for target augmented_reality
 augmented_reality_EXTERNAL_OBJECTS =
 
 augmented_reality: CMakeFiles/augmented_reality.dir/src/main.cpp.o
-augmented_reality: CMakeFiles/augmented_reality.dir/src/augmented_reality.cpp.o
-augmented_reality: CMakeFiles/augmented_reality.dir/src/csv_util.cpp.o
 augmented_reality: CMakeFiles/augmented_reality.dir/build.make
+augmented_reality: libar_lib.a
 augmented_reality: /opt/homebrew/lib/libopencv_gapi.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_stitching.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_alphamat.4.10.0.dylib
@@ -160,17 +129,17 @@ augmented_reality: /opt/homebrew/lib/libopencv_wechat_qrcode.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_xfeatures2d.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_xobjdetect.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_xphoto.4.10.0.dylib
-augmented_reality: /opt/homebrew/lib/libopencv_shape.4.10.0.dylib
+augmented_reality: /opt/homebrew/lib/libopencv_phase_unwrapping.4.10.0.dylib
+augmented_reality: /opt/homebrew/lib/libopencv_optflow.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_highgui.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_datasets.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_plot.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_text.4.10.0.dylib
+augmented_reality: /opt/homebrew/lib/libopencv_videoio.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_ml.4.10.0.dylib
-augmented_reality: /opt/homebrew/lib/libopencv_phase_unwrapping.4.10.0.dylib
-augmented_reality: /opt/homebrew/lib/libopencv_optflow.4.10.0.dylib
+augmented_reality: /opt/homebrew/lib/libopencv_shape.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_ximgproc.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_video.4.10.0.dylib
-augmented_reality: /opt/homebrew/lib/libopencv_videoio.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_imgcodecs.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_objdetect.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_calib3d.4.10.0.dylib
@@ -181,7 +150,7 @@ augmented_reality: /opt/homebrew/lib/libopencv_photo.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_imgproc.4.10.0.dylib
 augmented_reality: /opt/homebrew/lib/libopencv_core.4.10.0.dylib
 augmented_reality: CMakeFiles/augmented_reality.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable augmented_reality"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/sundri/Desktop/CS5330/Project4/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable augmented_reality"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/augmented_reality.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
