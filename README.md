@@ -64,12 +64,6 @@ https://drive.google.com/file/d/1EbaAiFpkKOE6GMyr8f4yY9y2jA74h4HI/view?usp=shari
    - Same AR functionality as main program
    - Supports various image and video formats
 
-4. **Testing Instructions**
-   - Place test images in: `../images/`
-   - Place test videos in: `../videos/`
-   - Follow prompts to select input type and file path
-   - Use same key controls as main program
-
 ### Time Travel Days
 - Got approval from professor using clause "stuff happens"
 
