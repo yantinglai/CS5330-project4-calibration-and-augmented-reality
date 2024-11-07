@@ -1,15 +1,22 @@
+/**
+ * Yanting Lai (002955701)
+ * Fall 2024
+ * CS 5330 Project 4
+ * cpp file for harris corner detection
+ */
+
 #include <opencv2/opencv.hpp>
 #include <iostream>
 #include <numeric>
 
 int thresh = 150;
-int blockSize = 2;  // 添加滑动条参数
-int kSize = 3;      // Sobel算子大小
+int blockSize = 2; 
+int kSize = 3;
 
 void onTrackbarChange(int, void*) {}
 
 int main() {
-    cv::VideoCapture cap(1);
+    cv::VideoCapture cap(0);
     if (!cap.isOpened()) {
         std::cerr << "Error: Could not open camera." << std::endl;
         return -1;

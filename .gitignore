@@ -1,0 +1,49 @@
+# Video files
+*.mov
+*.mp4
+*.avi
+*.wmv
+
+# C++ build artifacts
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+
+# Build directories
+build/
+Debug/
+Release/
+x64/
+x86/
+
+# IDE specific files
+.vscode/
+.idea/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
+# macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# OpenCV generated files
+*.jpg
+*.png
+*.bmp
+
+# Calibration data
+calibration_data/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile

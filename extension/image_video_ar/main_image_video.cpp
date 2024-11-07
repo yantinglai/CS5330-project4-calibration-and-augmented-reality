@@ -1,3 +1,10 @@
+/**
+ * Yanting Lai (002955701)
+ * Fall 2024
+ * CS 5330 Project 4
+ * main image video cpp file
+ */
+
 #include "image_video_ar.h"
 #include <iostream>
 #include <string>

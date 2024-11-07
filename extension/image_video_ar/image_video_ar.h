@@ -1,3 +1,10 @@
+/**
+ * Yanting Lai (002955701)
+ * Fall 2024
+ * CS 5330 Project 4
+ * image_video_ar.h
+ */
+
 #ifndef IMAGE_VIDEO_AR_H
 #define IMAGE_VIDEO_AR_H
 

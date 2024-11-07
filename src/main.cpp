@@ -1,10 +1,17 @@
+/**
+ * Yanting Lai (002955701)
+ * Fall 2024
+ * CS 5330 Project 4
+ * main file for augmented reality
+ */
+
 // main.cpp
 #include "augmented_reality.h"
 #include <iostream>
 #include <iomanip>
 
 int main() {
-    cv::VideoCapture cap(1);
+    cv::VideoCapture cap(0);
     if(!cap.isOpened()) {
         std::cerr << "Error: Could not open camera." << std::endl;
         return -1;

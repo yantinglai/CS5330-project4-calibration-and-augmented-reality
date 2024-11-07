@@ -1,3 +1,10 @@
+/**
+ * Yanting Lai (002955701)
+ * Fall 2024
+ * CS 5330 Project 4
+ * cpp file for augmented reality
+ */
+
 // augmented_reality.cpp
 #include "augmented_reality.h"
 
@@ -103,11 +110,21 @@ bool AugmentedReality::detectChessboard(cv::Mat& frame) {
 }
 
 void AugmentedReality::saveCalibrationData() {
+    // Debug print
+    std::cout << "\n--- Debug: Attempting to save calibration data ---" << std::endl;
+    
+    // Debug print
+    std::cout << "Last successful frame empty? " 
+              << (lastSuccessfulFrame.empty() ? "Yes" : "No") << std::endl;
+    std::cout << "Last successful corners empty? " 
+              << (lastSuccessfulCorners.empty() ? "Yes" : "No") << std::endl;
+
     if (lastSuccessfulFrame.empty() || lastSuccessfulCorners.empty()) {
         std::cout << "\nNo valid frame available to save" << std::endl;
         return;
     }
     
+    // Confirm all the lists are not empty after debug print
     corner_list.push_back(lastSuccessfulCorners);
     point_list.push_back(createWorldPoints());
     calibration_frames.push_back(lastSuccessfulFrame.clone());
